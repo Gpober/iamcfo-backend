@@ -2253,6 +2253,24 @@ async def test_qbo_connection():
             "✅ Fetch PRODUCTION data with complete field visibility" if CURRENT_ACCESS_TOKEN else "❌ Get tokens first"
         ]
     }
+@app.post("/api/test-insert")
+async def test_insert():
+    data = {
+        "entry_id": "test-001",
+        "txn_date": datetime.utcnow().date(),
+        "bank_account": "Chase Checking",
+        "property": "Test Property",
+        "account_name": "Rent Income",
+        "amount": 1234.56,
+        "direction": "in",
+        "raw_data": {"source": "manual"}
+    }
+
+    try:
+        response = supabase.table("cash_flow_splits").insert(data).execute()
+        return {"status": "success", "inserted": response.data}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
