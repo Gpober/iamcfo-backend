@@ -42,7 +42,7 @@ logger = logging.getLogger(__name__)
 # QuickBooks OAuth Configuration
 QBO_CLIENT_ID = os.getenv("QBO_CLIENT_ID")
 QBO_CLIENT_SECRET = os.getenv("QBO_CLIENT_SECRET")
-REDIRECT_URI = "https://iamcfo-backend.onrender.com/auth/qbo/callback"
+REDIRECT_URI = os.getenv("REDIRECT_URI")
 
 # QuickBooks endpoints - PRODUCTION MODE
 QBO_AUTH_URL = "https://appcenter.intuit.com/connect/oauth2"
